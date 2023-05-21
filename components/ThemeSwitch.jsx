@@ -71,7 +71,10 @@ export default function ThemeSwitch({ toggleTheme }) {
         labelPlacement="start"
         // label="Change Theme"
         label={
-          <Typography style={{ color: theme.palette.text.primary }}>
+          <Typography
+            variant="h5"
+            style={{ color: theme.palette.text.primary }}
+          >
             Change Theme
           </Typography>
         }
