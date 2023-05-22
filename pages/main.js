@@ -9,6 +9,7 @@ import CardContent from "@mui/material/CardContent";
 import Snackbar from "@mui/material/Snackbar";
 import Slide from "@mui/material/Slide";
 import Image from "next/image";
+import Confetti from "react-confetti";
 
 export default function Main({ toggleTheme }) {
   //state variables come here
@@ -33,6 +34,7 @@ export default function Main({ toggleTheme }) {
   const [isGuessing, setIsGuessing] = useState(false);
   const [powerupActivated, setPowerupActivated] = useState(false);
   const [isGameWon, setIsGameWon] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   //to render cards based off the difficuly selected
   const difficultyConfig = {
@@ -141,6 +143,7 @@ export default function Main({ toggleTheme }) {
   useEffect(() => {
     if (pairsMatched === totalPairs) {
       setIsGameWon(true);
+      setShowConfetti(true);
     }
   }, [pairsMatched, totalPairs]);
 
@@ -329,6 +332,13 @@ export default function Main({ toggleTheme }) {
               alignItems: "center",
             }}
           >
+            {showConfetti && (
+              <Confetti
+                width={window.innerWidth}
+                height={window.innerHeight}
+                // recycle={false} // Optional: Set to false to prevent confetti from stacking on top of each other
+              />
+            )}
             <Typography variant="h4" color={theme.palette.text.primary} mb={2}>
               Congratulations! You won the game!
             </Typography>
