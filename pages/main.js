@@ -8,6 +8,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Snackbar from "@mui/material/Snackbar";
 import Slide from "@mui/material/Slide";
+import Image from "next/image";
 
 export default function Main({ toggleTheme }) {
   //state variables come here
@@ -81,7 +82,7 @@ export default function Main({ toggleTheme }) {
 
       setPokemonCards(shuffledPokemon);
     }
-  }, [selectedDifficulty]);
+  }, [selectedDifficulty, selectedDifficulty]);
 
   useEffect(() => {
     if (gameStarted) {
@@ -329,7 +330,7 @@ export default function Main({ toggleTheme }) {
             }}
           >
             <Typography variant="h4" color={theme.palette.text.primary} mb={2}>
-              Congratulations! You've won the game!
+              Congratulations! You won the game!
             </Typography>
             <Button
               variant="outlined"
@@ -401,36 +402,50 @@ export default function Main({ toggleTheme }) {
                       position: "relative",
                     }}
                   >
-                    <img
-                      src={pokemonData[index]?.image}
-                      alt={`Pokemon ${index + 1}`}
+                    <div
                       style={{
                         width: "80%",
                         height: "80%",
-                        objectFit: "cover",
                         position: "absolute",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                         backfaceVisibility: "hidden",
                         transition: "transform 0.6s",
                         transformStyle: "preserve-3d",
                         transform: flippedCards[index] ? "rotateY(180deg)" : "",
                       }}
-                    />
-                    <img
-                      src={
-                        "https://www.freepnglogos.com/uploads/pokeball-png/pokeball-black-gel-icing-musings-marvelous-15.png"
-                      }
-                      alt="Pokeball"
+                    >
+                      <Image
+                        src={pokemonData[index]?.image}
+                        alt={`Pokemon ${index + 1}`}
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                    </div>
+                    <div
                       style={{
                         width: "80%",
                         height: "80%",
-                        objectFit: "cover",
                         position: "absolute",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                         backfaceVisibility: "hidden",
                         transition: "transform 0.6s",
                         transformStyle: "preserve-3d",
                         transform: flippedCards[index] ? "" : "rotateY(180deg)",
                       }}
-                    />
+                    >
+                      <Image
+                        src={
+                          "https://www.freepnglogos.com/uploads/pokeball-png/pokeball-black-gel-icing-musings-marvelous-15.png"
+                        }
+                        alt="Pokeball"
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                    </div>
                   </CardContent>
                 </Card>
               </Box>
