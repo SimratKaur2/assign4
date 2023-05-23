@@ -72,7 +72,7 @@ export default function ThemeSwitch({ toggleTheme }) {
         // label="Change Theme"
         label={
           <Typography
-            variant="h6"
+            variant="h5"
             style={{ color: theme.palette.text.primary }}
             sx={{
               // Adjust text size for mobile view

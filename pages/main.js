@@ -34,6 +34,7 @@ export default function Main({ toggleTheme }) {
   const [isGuessing, setIsGuessing] = useState(false);
   const [powerupActivated, setPowerupActivated] = useState(false);
   const [isGameWon, setIsGameWon] = useState(false);
+  const [isGameLost, setIsGameLost] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
 
   //to render cards based off the difficuly selected
@@ -148,6 +149,12 @@ export default function Main({ toggleTheme }) {
   }, [pairsMatched, totalPairs]);
 
   useEffect(() => {
+    if (timeRemaining === 0) {
+      setIsGameLost(true);
+    }
+  }, [timeRemaining]);
+
+  useEffect(() => {
     const powerupInterval = setInterval(() => {
       //   alert("Powerup activated!");
       if (!isGameWon) {
@@ -220,6 +227,8 @@ export default function Main({ toggleTheme }) {
     setTotalPairs(totalPairs);
     setTotalTime(totalTime);
     setIsGameWon(false);
+    setIsGameLost(false);
+
     // initializing flippedCards based on totalPairs
     setFlippedCards(Array(totalPairs * 2).fill(true)); // Initialize flippedCards based on totalPairs
 
@@ -241,7 +250,7 @@ export default function Main({ toggleTheme }) {
     setGuessingCards([]);
     setMatchedCards([]);
     setIsGameWon(false);
-
+    setIsGameLost(false);
     // Additional logic specific to resetting the game
     // Reset the timer, reshuffle the cards, etc.
   };
@@ -358,6 +367,41 @@ export default function Main({ toggleTheme }) {
               onClick={handleResetGameClick}
             >
               Play Again!
+            </Button>
+          </Container>
+        );
+      }
+
+      if (isGameLost) {
+        return (
+          <Container
+            maxWidth={false}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              variant="h4"
+              color={theme.palette.text.primary}
+              mb={2}
+              sx={{
+                // Adjust text size for mobile view
+                "@media (max-width: 600px)": {
+                  fontSize: "1rem",
+                },
+              }}
+            >
+              Game Over! You lost.
+            </Typography>
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={handleResetGameClick}
+            >
+              Try Again!
             </Button>
           </Container>
         );
@@ -617,7 +661,7 @@ export default function Main({ toggleTheme }) {
         />
 
         <Typography
-          variant="h3"
+          variant="h2"
           color={theme.palette.text.primary}
           mt={2}
           sx={{
