@@ -157,7 +157,7 @@ export default function Main({ toggleTheme }) {
   useEffect(() => {
     const powerupInterval = setInterval(() => {
       //   alert("Powerup activated!");
-      if (!isGameWon) {
+      if (!isGameWon || !isGameLost) {
         setPowerupActivated(true);
         setFlippedCards((prevFlippedCards) =>
           prevFlippedCards.map((flipped, index) =>
@@ -178,7 +178,7 @@ export default function Main({ toggleTheme }) {
     return () => {
       clearInterval(powerupInterval);
     };
-  }, [isGameWon]);
+  }, [isGameWon, isGameLost]);
 
   const getPokemon = async (id) => {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
