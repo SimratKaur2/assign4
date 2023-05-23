@@ -14,7 +14,7 @@ export default function DifficultyButtons({ onClick }) {
 
   return (
     <Box
-      mt={3}
+      mt={2}
       mb={3}
       sx={{
         display: "flex",

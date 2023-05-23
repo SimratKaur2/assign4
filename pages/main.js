@@ -339,12 +339,22 @@ export default function Main({ toggleTheme }) {
                 // recycle={false} // Optional: Set to false to prevent confetti from stacking on top of each other
               />
             )}
-            <Typography variant="h4" color={theme.palette.text.primary} mb={2}>
+            <Typography
+              variant="h4"
+              color={theme.palette.text.primary}
+              mb={2}
+              sx={{
+                // Adjust text size for mobile view
+                "@media (max-width: 600px)": {
+                  fontSize: "1rem",
+                },
+              }}
+            >
               Congratulations! You won the game!
             </Typography>
             <Button
               variant="outlined"
-              size="large"
+              size="small"
               onClick={handleResetGameClick}
             >
               Play Again!
@@ -371,39 +381,113 @@ export default function Main({ toggleTheme }) {
             justifyContent="center"
             alignItems="center"
           >
-            <Typography variant="h4" color={theme.palette.text.primary} mb={1}>
+            <Typography
+              variant="h4"
+              color={theme.palette.text.primary}
+              sx={{
+                // Adjust text size for mobile view
+                "@media (max-width: 600px)": {
+                  fontSize: "1.5rem",
+                },
+              }}
+            >
               Level {level}
             </Typography>
-            <Typography variant="h6" color={theme.palette.text.primary} mb={1}>
+            <Typography
+              variant="h6"
+              color={theme.palette.text.primary}
+              sx={{
+                // Adjust text size for mobile view
+                "@media (max-width: 600px)": {
+                  fontSize: "0.9rem",
+                },
+              }}
+            >
               Lets see if you can complete it in {totalTime} seconds.
             </Typography>
-            <Typography variant="h6" color={theme.palette.text.primary}>
-              Total Pairs: {totalPairs}
-            </Typography>
-            <Typography variant="h6" color={theme.palette.text.primary}>
-              Pairs Matched: {pairsMatched}
-            </Typography>
-            <Typography variant="h6" color={theme.palette.text.primary}>
-              Pairs Left: {pairsLeft}
-            </Typography>
-            <Typography variant="h6" color={theme.palette.text.primary}>
-              Clicks: {clickCount}
-            </Typography>
-            <Typography variant="h6" color={theme.palette.text.primary} mb={2}>
-              Time left: {timeRemaining} seconds
-            </Typography>
+            <div>
+              <Typography
+                variant="body1"
+                color={theme.palette.text.primary}
+                mt={1}
+                sx={{
+                  // Adjust text size for mobile view
+                  "@media (max-width: 600px)": {
+                    fontSize: "0.9rem",
+                  },
+                }}
+              >
+                Total Pairs: {totalPairs}
+              </Typography>
+              <Typography
+                variant="body1"
+                color={theme.palette.text.primary}
+                sx={{
+                  // Adjust text size for mobile view
+                  "@media (max-width: 600px)": {
+                    fontSize: "0.9rem",
+                  },
+                }}
+              >
+                Pairs Matched: {pairsMatched}
+              </Typography>
+              <Typography
+                variant="body1"
+                color={theme.palette.text.primary}
+                sx={{
+                  // Adjust text size for mobile view
+                  "@media (max-width: 600px)": {
+                    fontSize: "0.9rem",
+                  },
+                }}
+              >
+                Pairs Left: {pairsLeft}
+              </Typography>
+              <Typography
+                variant="body1"
+                color={theme.palette.text.primary}
+                sx={{
+                  // Adjust text size for mobile view
+                  "@media (max-width: 600px)": {
+                    fontSize: "0.9rem",
+                  },
+                }}
+              >
+                Clicks: {clickCount}
+              </Typography>
+              <Typography
+                variant="body1"
+                color={theme.palette.text.primary}
+                mb={1}
+                sx={{
+                  // Adjust text size for mobile view
+                  "@media (max-width: 600px)": {
+                    fontSize: "0.9rem",
+                  },
+                }}
+              >
+                Time left: {timeRemaining} seconds
+              </Typography>
+            </div>
             <Button
               variant="outlined"
-              size="large"
+              size="medium"
               onClick={handleResetGameClick}
-              mb={2}
             >
               Reset Game
             </Button>
           </Box>
-          <Box display="flex" flexDirection="row" flexWrap="wrap" m={6}>
+          <Box
+            display="flex"
+            flexDirection="row"
+            flexWrap="wrap"
+            ml
+            mr={{ xs: 1, md: 6 }}
+            mt={{ xs: 1, md: 2 }}
+            mb={{ xs: 3, md: 3 }}
+          >
             {Array.from({ length: totalPairs * 2 }).map((_, index) => (
-              <Box key={index} width="25%" padding={1}>
+              <Box key={index} width={{ xs: "50%", md: "25%" }} padding={1}>
                 <Card onClick={() => handleCardClick(index)}>
                   <CardContent
                     style={{
@@ -494,7 +578,6 @@ export default function Main({ toggleTheme }) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        // height: "100vh",
         minHeight: "100vh",
       }}
     >
@@ -516,6 +599,12 @@ export default function Main({ toggleTheme }) {
               horizontal: "right",
             },
             transform: "translateX(-50%)",
+            "@media (max-width: 600px)": {
+              // Adjust styles for mobile view
+              width: "50%",
+              transform: "translateX(-1%)",
+              fontSize: "12px",
+            },
           }}
           anchorOrigin={{
             vertical: "top",
@@ -527,7 +616,17 @@ export default function Main({ toggleTheme }) {
           }}
         />
 
-        <Typography variant="h2" color={theme.palette.text.primary}>
+        <Typography
+          variant="h3"
+          color={theme.palette.text.primary}
+          mt={2}
+          sx={{
+            // Adjust text size for mobile view
+            "@media (max-width: 600px)": {
+              fontSize: "1.9rem",
+            },
+          }}
+        >
           Pokémon Memory Match
         </Typography>
         <ThemeSwitch toggleTheme={toggleTheme} />
@@ -535,7 +634,16 @@ export default function Main({ toggleTheme }) {
           renderGameContent()
         ) : (
           <>
-            <Typography variant="h4" color={theme.palette.text.primary}>
+            <Typography
+              variant="h4"
+              color={theme.palette.text.primary}
+              sx={{
+                // Adjust text size for mobile view
+                "@media (max-width: 600px)": {
+                  fontSize: "1.5rem",
+                },
+              }}
+            >
               Choose Difficulty
             </Typography>
             <DifficultyButtons onClick={handleDifficultyClick} />
